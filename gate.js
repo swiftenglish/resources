@@ -5,19 +5,19 @@
   const style=document.createElement('style');
   style.textContent=[
     'html.swift-locked .workspace{visibility:hidden!important}',
-    '#swift-gate{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:24px;background:linear-gradient(145deg,#e9f1f7,#f7fafc);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#18354c}',
-    '#swift-gate .panel{width:min(100%,390px);background:white;border-radius:22px;padding:32px;box-shadow:0 18px 60px #1b39551f;text-align:center}',
-    '#swift-gate img{width:160px;max-width:80%;height:auto;margin:0 auto 12px;display:block}',
-    '#swift-gate h1{font-size:23px;margin:0 0 5px}',
-    '#swift-gate p{color:#627487;font-size:14px;line-height:1.6;margin:0 0 22px}',
-    '#swift-gate label{display:block;font-size:13px;font-weight:700;text-align:left;margin-bottom:8px}',
-    '#swift-gate input{box-sizing:border-box;width:100%;padding:14px;border:1px solid #afc0ce;border-radius:10px;font:inherit}',
-    '#swift-gate input:focus{outline:3px solid #b2d6e8}',
-    '#swift-gate button{width:100%;margin-top:13px;border:0;border-radius:10px;padding:14px;background:#1b4563;color:white;font-weight:700;font-size:15px;cursor:pointer}',
+    '#swift-gate{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:24px;background:#f0efe9;font-family:IBM Plex Sans,system-ui,sans-serif;color:#283d39}',
+    '#swift-gate .panel{width:min(100%,424px);background:#fffefa;border:1px solid #dadfd6;border-top:3px solid #436f60;border-radius:5px;padding:38px 36px 30px;box-shadow:none;text-align:center}',
+    '#swift-gate img{width:176px;max-width:82%;height:auto;margin:0 auto 25px;display:block}',
+    '#swift-gate h1{font:500 33px/1.15 Source Serif 4,Georgia,serif;letter-spacing:-.5px;margin:0 0 12px}',
+    '#swift-gate p{color:#6b7d72;font-size:13px;line-height:1.7;margin:0 0 27px}',
+    '#swift-gate label{display:block;font-size:12px;font-weight:600;text-align:left;margin-bottom:8px}',
+    '#swift-gate input{box-sizing:border-box;width:100%;padding:13px;border:1px solid #b7c4ba;border-radius:3px;background:#fff;font:inherit}',
+    '#swift-gate input:focus{outline:2px solid #8da99c;outline-offset:2px}',
+    '#swift-gate button{width:100%;margin-top:13px;border:0;border-radius:3px;padding:13px;background:#31594e;color:white;font-weight:600;font-size:13px;cursor:pointer}',
     '#swift-gate button:disabled{opacity:.6;cursor:wait}',
-    '#swift-gate small{font-size:12px;color:#718093;display:block;line-height:1.6;margin-top:12px}',
+    '#swift-gate small{font-size:11px;color:#7b8a80;display:block;line-height:1.65;margin-top:17px}',
     '#swift-gate .message{min-height:20px;margin-top:10px;color:#a0412b;font-size:13px}',
-    '.swift-lock-button{background:transparent;border:1px solid currentColor;border-radius:8px;padding:6px 10px;color:inherit;cursor:pointer}'
+    '.swift-lock-button{background:transparent;border:1px solid #b4c7bc;border-radius:3px;padding:6px 10px;color:inherit;cursor:pointer}'
   ].join('');
   document.head.appendChild(style);
   const screen=document.createElement('section');
@@ -25,10 +25,10 @@
   screen.setAttribute('role','dialog');screen.setAttribute('aria-modal','true');
   screen.setAttribute('aria-label','Staff password');
   screen.innerHTML='<div class="panel"><img src="logo.png" alt="Swift English School">'
-    +'<h1>Teacher Resource Portal</h1><p>Enter the shared staff password to unlock teaching materials.</p>'
+    +'<h1>Teacher library</h1><p>Enter the staff password to access your teaching resources.</p>'
     +'<form id="swift-unlock"><label for="swift-password">Staff password</label>'
     +'<input id="swift-password" type="password" autocomplete="current-password" required autofocus>'
-    +'<button type="submit">Unlock portal</button><div class="message" role="status" aria-live="polite" id="swift-message"></div></form>'
+    +'<button type="submit">Open the library</button><div class="message" role="status" aria-live="polite" id="swift-message"></div></form>'
     +'<small>Teaching materials remain in Google Drive. Original permissions still apply.</small></div>';
   document.body.appendChild(screen);
   const input=document.getElementById('swift-password');
