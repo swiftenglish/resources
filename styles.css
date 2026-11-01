@@ -18,3 +18,25 @@
 @media(max-width:1300px){.brand{margin-left:7px;margin-right:7px}.brand-logo-frame{padding:5px 10px}}
 @media(max-width:790px){.brand{margin-top:2px}}
 @media print{.print-logo{width:134px;margin-bottom:18px}}
+
+/* Visual bookshelf: genuine edition-matched cover thumbnails, with category-specific fallbacks. */
+.resource-media{height:172px;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;margin:-21px -21px 16px;border-radius:17px 17px 0 0;background:linear-gradient(150deg,#e9f3ef,#d8e9e8);overflow:hidden}
+.resource-media.tone-sky{background:linear-gradient(140deg,#e7f3fd,#d6e5f2)}
+.resource-media.tone-sand{background:linear-gradient(140deg,#fff1dd,#f4e5cb)}
+.resource-media.tone-purple{background:linear-gradient(140deg,#f0eafa,#e0d5f2)}
+.book-cover-image{height:153px;max-width:75%;width:auto;object-fit:contain;z-index:1;background:#fff;border:1px solid #c5cdd0;box-shadow:0 8px 20px #142d4138;border-radius:2px}
+.resource-media-fallback{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#49747d}
+.resource-media-fallback .resource-media-icon{display:grid;place-items:center;width:70px;height:70px;border-radius:22px;background:#ffffffa3;box-shadow:0 8px 25px #16425c13}
+.resource-media-fallback .resource-media-icon svg{width:34px;height:34px}
+.resource-media-level{font-size:11px;letter-spacing:.18em;font-weight:800;text-transform:uppercase}
+.resource-media.has-cover .resource-media-fallback{display:none}
+.resource-media.cover-failed .book-cover-image{display:none}
+.resource-media.cover-failed .resource-media-fallback{display:flex}
+.resource-media-tag{position:absolute;bottom:10px;left:12px;z-index:2;color:#2c5564;background:#ffffffde;border:1px solid #ffffffc0;letter-spacing:.045em;font-weight:800;font-size:9px;text-transform:uppercase;padding:5px 9px;border-radius:7px}
+.cards-grid.compact-layout .resource-media{display:none}
+.cards-grid.compact-layout .resource-card{min-height:unset}
+body.dark .resource-media.tone-sea{background:linear-gradient(140deg,#254e53,#1c393f)}
+body.dark .resource-media.tone-sky{background:linear-gradient(140deg,#29465c,#20344d)}
+body.dark .resource-media.tone-sand{background:linear-gradient(140deg,#5b4b35,#403c35)}
+body.dark .resource-media.tone-purple{background:linear-gradient(140deg,#483c5a,#342b49)}
+@media(max-width:540px){.resource-media{height:155px}.book-cover-image{height:137px}}
