@@ -135,7 +135,7 @@ function card(r,featured=false){const c=esc(r.id);return `<article class="resour
 function counts(){return {folders:CATALOGUE.filter(x=>x.format==='folder').length,files:CATALOGUE.filter(x=>x.format==='file').length,saved:state.savedIds.length,plans:state.lessons.length}}
 
 function home(){
- const featuredBooks=CATALOGUE.filter(r=>r.category==='Books & trainers'&&coverSources(r).length);
+ const featuredBooks=CATALOGUE.filter(r=>r.category==='Books & trainers');
  const byLevel=['B1','B2','C1','C2'].map(level=>featuredBooks.find(r=>r.level===level)).filter(Boolean);
  const spotlight=[...byLevel,...featuredBooks.filter(r=>!byLevel.includes(r))].slice(0,4);
  const upcoming=state.lessons.filter(x=>x.date&&x.date>=new Date().toISOString().slice(0,10)).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
