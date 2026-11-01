@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-start-view="planner">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#162b40" />
+  <meta name="description" content="Swift English School — teacher resource library, exam materials, answer keys, audio and lesson planning." />
+  <link rel="icon" href="icon-192.png" type="image/png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>Swift English | Teacher Workspace</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="workspace" id="workspace">
+    <aside class="sidebar" id="sidebar">
+      <a href="#home" class="brand" data-view="home" aria-label="Swift English home">
+        <span class="brand-logo-frame"><img id="schoolLogo" class="brand-logo" src="logo.png" width="333" height="235" alt="Swift English School" /></span><span class="brand-caption"><span class="brand-caption-line" aria-hidden="true"></span>STAFF RESOURCE HUB</span>
+      </a>
+      <div class="sidebar-eyebrow">WORKSPACE</div>
+      <nav class="nav-primary" aria-label="Main navigation">
+        <button type="button" data-view="home" class="nav-link active"><span data-icon="layout-dashboard"></span><span>Overview</span></button>
+        <button type="button" data-view="library" class="nav-link"><span data-icon="library"></span><span>Resource library</span><span class="nav-mini" id="navResourceCount">57</span></button>
+        <button type="button" data-view="answers" class="nav-link"><span data-icon="key-round"></span><span>Keys & scripts</span></button>
+        <button type="button" data-view="planner" class="nav-link"><span data-icon="calendar-days"></span><span>Lesson planner</span></button>
+        <button type="button" data-view="saved" class="nav-link"><span data-icon="bookmark"></span><span>Saved resources</span><span class="nav-mini" id="navSavedCount">0</span></button>
+      </nav>
+      <div class="sidebar-eyebrow second-eyebrow">BROWSE BY LEVEL</div>
+      <div class="level-nav">
+        <button data-level-shortcut="B1"><span class="level-dot" style="--dot:#83a8e6"></span> B1 Preliminary</button>
+        <button data-level-shortcut="B2"><span class="level-dot" style="--dot:#78c5b6"></span> B2 First</button>
+        <button data-level-shortcut="C1"><span class="level-dot" style="--dot:#f7bb80"></span> C1 Advanced</button>
+        <button data-level-shortcut="C2"><span class="level-dot" style="--dot:#d29ee3"></span> C2 Proficiency</button>
+        <button data-level-shortcut="IELTS"><span class="level-dot" style="--dot:#efb8a0"></span> IELTS</button>
+        <button data-level-shortcut="PAU"><span class="level-dot" style="--dot:#eecf84"></span> PAU Aragón</button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="source-note"><span data-icon="shield-check"></span><strong>Linked to your Drive</strong><span>Files stay in Google Drive. Existing access rules still apply.</span></div>
+        <a class="sidebar-genially" href="https://view.genially.com/693ade6587d83e5d1fb2950c" target="_blank" rel="noopener noreferrer"><span data-icon="external-link"></span> Original Genially</a>
+      </div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar">
+        <button class="icon-button hamburger" id="menuButton" aria-label="Open menu"><span data-icon="menu"></span></button>
+        <div class="breadcrumb"><span>SWIFT ENGLISH</span><span class="crumb-slash">/</span><strong id="breadcrumbCurrent">Overview</strong></div>
+        <div class="topbar-actions">
+          <div class="top-status"><span class="status-dot"></span> Teacher edition</div>
+          <button class="icon-button" id="themeToggle" type="button" title="Toggle colour theme" aria-label="Toggle colour theme"><span data-icon="moon"></span></button>
+          <button class="icon-button" id="backupButton" type="button" title="Export your local data" aria-label="Export local data"><span data-icon="download"></span></button>
+          <button class="avatar-button" type="button" data-view="planner" title="Teacher planner">TE</button>
+        </div>
+      </header>
+      <main id="app" tabindex="-1" aria-live="polite"></main>
+      <footer class="app-footer"><span>SWIFT ENGLISH SCHOOL <span class="dotsep">·</span> TEACHER WORKSPACE</span><span>Local prototype · Google Drive permissions apply</span></footer>
+    </div>
+  </div>
+  <div id="overlay" class="mobile-overlay" hidden></div>
+  <div id="modalMount"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <input type="file" accept="application/json,.json" id="backupImport" hidden />
+  <script src="gate.js"></script>
+</body>
+</html>

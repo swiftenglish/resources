@@ -1,0 +1,20 @@
+{
+  "name": "Swift English School \u2014 Staff Resource Hub",
+  "short_name": "Swift Teachers",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8f8f5",
+  "theme_color": "#162b40",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
