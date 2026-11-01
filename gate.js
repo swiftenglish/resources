@@ -56,7 +56,6 @@
     '9ad050ddbf2713ef55882f1a2e89c94243f4723b18db5df52709137edb5c5a47',
     '5e7a5eb284d2b77b3ae3ddbce8b31e4b8470dcc83cbf46769c929bad96ace882',
     '53fc7a3478f1408e8341df4d26d9799aea343995f840adcfe7c6e49b4c6994ea',
-    '45c7d9765663cb6071b102f53ad9752ac8464d471c0e2b991473f0b541dc48d7',
     '67f1ce91f767f9de2ea5a42d005516198efdbedc3a39b883cc7ec8a15fc8ae76',
     '7e745101d704d6fdf6e19f9b783347e7d54090ceb377effd206fe043f3a23a8e',
     'f799a24d6b25342fb6a144cf05522d324554e246b037b1ca483876b1ae984c8c'
@@ -114,7 +113,7 @@
       };
       document.body.appendChild(app);
     }catch(error){
-      message.textContent=/Encrypted catalogue|HTTPS|Invalid encrypted|Invalid decrypted/.test(error.message)
+      message.textContent=/Encrypted catalogue|HTTPS|Invalid encrypted|Invalid decrypted|No verified teacher-owned/.test(error.message)
         ? error.message : 'Incorrect password. Please try again.';
       input.select();button.disabled=false;
     }
