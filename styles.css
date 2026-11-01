@@ -40,3 +40,19 @@ body.dark .resource-media.tone-sky{background:linear-gradient(140deg,#29465c,#20
 body.dark .resource-media.tone-sand{background:linear-gradient(140deg,#5b4b35,#403c35)}
 body.dark .resource-media.tone-purple{background:linear-gradient(140deg,#483c5a,#342b49)}
 @media(max-width:540px){.resource-media{height:155px}.book-cover-image{height:137px}}
+
+/* Teacher-facing Cover Manager: image search, upload, assignment and export. */
+.cover-manager .form-field{gap:8px}
+.cover-manager-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(160px,.75fr);gap:22px;align-items:start;margin:20px 0}
+.cover-upload{margin-top:23px;border:1px dashed #b9c9d0;background:#f7fafb;border-radius:12px;padding:16px}
+.cover-upload label{font-size:12px;font-weight:800;color:#315268;display:block;margin-bottom:9px}
+.cover-upload input{display:block;width:100%;max-width:100%;font-size:12px}
+.cover-upload p{color:#70828d;font-size:11px;margin:10px 0 0;line-height:1.5}
+.cover-preview-box{min-height:220px;border:1px solid #dce7e8;background:#f1f6f5;border-radius:14px;padding:15px;display:flex;align-items:center;justify-content:center;text-align:center;color:#7a8c91;font-size:12px;overflow:hidden}
+.cover-preview-box img{max-width:100%;max-height:230px;object-fit:contain;box-shadow:0 8px 28px #0d324533}
+.cover-preview-status{font-size:11px;color:#758791;line-height:1.5;margin:8px 0 0}
+.cover-manager-note{font-size:11px;line-height:1.7;padding:12px 14px;background:#fff5e7;color:#6d5a40;border-radius:11px}
+.cover-manager-transfer{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.resource-card .card-footer{flex-wrap:wrap}
+.resource-card .card-footer .btn{flex:1 0 auto}
+@media(max-width:650px){.cover-manager-layout{grid-template-columns:1fr}.cover-preview-box{min-height:190px}.resource-card .card-footer .btn{font-size:11px}}
