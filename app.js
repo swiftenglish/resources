@@ -46,9 +46,60 @@ function header(eyebrow,title,desc,actions=''){return `<div class="page-heading"
 function categoryIcon(r){if(r.category==='Audio & listening')return 'headphones';if(r.category==='Answer keys & scripts')return r.kind==='Answer key'?'key-round':'file-text';if(r.category==='Books & trainers')return 'book-open';if(r.category==='Exam & skills')return 'file-check';return r.format==='file'?'file-text':'folder'}
 function tone(r){if(r.category==='Audio & listening')return 'tone-sky';if(r.category==='Answer keys & scripts')return 'tone-sand';if(r.category==='Books & trainers')return 'tone-sea';if(r.category==='Exam & skills')return 'tone-purple';return 'tone-sky'}
 function kindSummary(r){if(r.itemCount===0)return 'Empty folder at the last check.';return r.note||'Resource available in the connected Google Drive.'}
+const BOOK_COVER_SOURCES={
+  "B1 PET Complete (revised exam)": [
+    "https://i.ebayimg.com/images/g/ExMAAOSw4JpnrTth/s-l1200.jpg",
+    "https://covers.openlibrary.org/b/isbn/9781108525213-M.jpg?default=false",
+    "https://pictures.abebooks.com/isbn/9781108525213-us.jpg",
+    "https://books.google.com/books/content?vid=ISBN9781108525213&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+  ],
+  "B1 PET Compact (revised exam)": [
+    "https://cdn1.fahasa.com/media/catalog/product/i/m/image_195509_1_30248.jpg",
+    "https://covers.openlibrary.org/b/isbn/9781108616195-M.jpg?default=false",
+    "https://pictures.abebooks.com/isbn/9781108616195-us.jpg",
+    "https://books.google.com/books/content?vid=ISBN9781108616195&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+  ],
+  "PET for Schools Complete Student Book": [
+    "https://website-assets.studocu.com/img/document_thumbnails/820d5b979ab967545a95e7ef22566ec9/thumb_1200_1553.png",
+    "https://static.imosver.com/imagenes_small/9781108/978110853905.jpg",
+    "https://pictures.abebooks.com/isbn/9781108539050-us.jpg",
+    "https://covers.openlibrary.org/b/isbn/9781108539050-M.jpg?default=false",
+    "https://books.google.com/books/content?vid=ISBN9781108539050&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+  ],
+  "B2 FCE Complete (2nd edition)": [
+    "https://pictures.abebooks.com/isbn/9781107633902-us.jpg",
+    "https://covers.openlibrary.org/b/isbn/9781107633902-M.jpg?default=false",
+    "https://books.google.com/books/content?vid=ISBN9781107633902&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+  ],
+  "C1 CAE Complete (3rd edition)": [
+    "https://images.thalia.media/-/BF2000-2000/f2dff1a1900f491898d11d2a03d2c861/complete-advanced-third-edition-student-s-book-with-answers-with-digital-pack-klett-sprachen-gmbh.jpeg",
+    "https://covers.openlibrary.org/b/isbn/9783125352537-M.jpg?default=false",
+    "https://books.google.com/books/content?vid=ISBN9783125352537&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+  ],
+  "C1 CAE Compact (2015 spec)": [
+    "https://armazemdolivro.cdn.magazord.com.br/img/2025/02/produto/1530/compact-advanced-student-s-book-without-answer-c1-english-profile.png",
+    "https://pictures.abebooks.com/isbn/9781107418080-us.jpg",
+    "https://covers.openlibrary.org/b/isbn/9781107418080-M.jpg?default=false",
+    "https://books.google.com/books/content?vid=ISBN9781107418080&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+  ]
+};
+function coverSources(r){
+ const known=BOOK_COVER_SOURCES[r.title]||[];
+ const candidates=[...known,r.coverImage].filter(url=>typeof url==='string'&&/^https:\/\//i.test(url));
+ return [...new Set(candidates)];
+}
+function tryNextCover(img){
+ if(!img||!img.matches?.('.book-cover-image'))return;
+ let others=[];try{others=JSON.parse(img.dataset.remainingCovers||'[]')}catch(e){}
+ if(others.length){
+  img.dataset.remainingCovers=JSON.stringify(others.slice(1));
+  img.src=others[0];
+ }else{img.closest('.resource-media')?.classList.add('cover-failed');}
+}
 function coverMarkup(r){
- const hasCover=r.category==='Books & trainers'&&typeof r.coverImage==='string'&&/^https:\/\//i.test(r.coverImage);
- const image=hasCover?`<img class="book-cover-image" src="${safeHref(r.coverImage)}" alt="Cover preview: ${esc(r.title)}" loading="lazy" decoding="async">`:'';
+ const sources=r.category==='Books & trainers'?coverSources(r):[];
+ const hasCover=sources.length>0;
+ const image=hasCover?`<img class="book-cover-image" src="${safeHref(sources[0])}" data-remaining-covers="${esc(JSON.stringify(sources.slice(1)))}" alt="Book cover: ${esc(r.title)}" loading="lazy" decoding="async">`:'';
  const type=r.category==='Audio & listening'?'Audio':r.category==='Answer keys & scripts'?'Teacher key':r.category==='Books & trainers'?'Book cover':r.category==='Exam & skills'?'Exam materials':'Folder';
  return `<div class="resource-media ${tone(r)} ${hasCover?'has-cover':''}">${image}<div class="resource-media-fallback"><span class="resource-media-icon">${I(categoryIcon(r))}</span><span class="resource-media-level">${esc(r.level)}</span></div><span class="resource-media-tag">${esc(type)}</span></div>`;
 }
@@ -103,7 +154,8 @@ if(['exportButton','exportButtonSide','backupButton'].includes(el.id)){exportDat
 if(['importButton','importButtonSide'].includes(el.id)){document.getElementById('backupImport').click();return}
 if(el.id==='printLesson'){window.print();return}
 }
-document.addEventListener('error',e=>{if(e.target.matches?.('.book-cover-image'))e.target.closest('.resource-media')?.classList.add('cover-failed')},true);
+document.addEventListener('error',e=>{if(e.target.matches?.('.book-cover-image'))tryNextCover(e.target)},true);
+document.addEventListener('load',e=>{if(e.target.matches?.('.book-cover-image') && (e.target.naturalWidth<40||e.target.naturalHeight<50))tryNextCover(e.target)},true);
 document.addEventListener('click',handleClick);
 document.addEventListener('input',e=>{if(e.target.id==='librarySearch'){ui.query=e.target.value;updateResults()}});
 document.addEventListener('change',e=>{if(e.target.id==='levelFilter'){ui.level=e.target.value;updateResults()}else if(e.target.id==='backupImport'){importData(e.target.files?.[0]);e.target.value=''}else if(e.target.dataset.taskToggle){const t=state.tasks.find(x=>x.id===e.target.dataset.taskToggle);if(t){t.done=e.target.checked;persist();render()}}});
