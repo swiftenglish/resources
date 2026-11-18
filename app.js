@@ -244,7 +244,8 @@ function updateCollections(){
  '<div class="empty-state">'+I('search')+'<h3>No matching titles</h3><p>Try another exam or search term. Entries without verified links are hidden when that filter is active.</p><button type="button" class="btn btn-outline" data-collections-reset>Clear filters</button></div>';
  const related=document.getElementById('collectionsRelated');
  if(!related)return;
- const approved=CATALOGUE.filter(r=>ui.collectionLevel==='All'||r.level===ui.collectionLevel);
+ const linkedResources=GENIALLY_INDEX.filter(row=>ui.collectionLevel==='All'||row[0]===ui.collectionLevel).map(collectionLinked).filter(Boolean).map(match=>match.resource);
+ const approved=[...new Map([...CATALOGUE.filter(r=>ui.collectionLevel==='All'||r.level===ui.collectionLevel),...linkedResources].map(r=>[r.id,r])).values()];
  related.innerHTML=approved.length?'<div class="editorial-section-heading"><div><p class="editorial-index">APPROVED SCHOOL DRIVE</p><h2>Available teaching resources</h2><p>These are verified school-owned resources at the selected level, not necessarily the same editions as the reference titles above.</p></div><button class="text-link" type="button" data-view="library">Full library '+I('arrow-right')+'</button></div><div class="collections-linked-list">'+approved.map(r=>'<button type="button" data-detail="'+esc(r.id)+'"><span class="collections-linked-icon">'+I(categoryIcon(r))+'</span><span><strong>'+esc(r.title)+'</strong><small>'+esc(r.level)+' · '+esc(r.category)+'</small></span>'+I('chevron-right','icon-sm')+'</button>').join('')+'</div>':
  '<div class="collections-unavailable"><strong>No verified Drive resources for this exam yet.</strong><p>Names can still be searched here. A school administrator must confirm ownership before a file link is published.</p></div>';
 }
